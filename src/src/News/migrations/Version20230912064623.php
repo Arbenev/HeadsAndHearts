@@ -12,6 +12,7 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20230912064623 extends AbstractMigration
 {
+
     public function getDescription(): string
     {
         return '';
@@ -20,23 +21,21 @@ final class Version20230912064623 extends AbstractMigration
     public function up(Schema $schema): void
     {
         $newsTable = $schema->createTable('news');
-        
+
         $newsTable->addColumn('id', 'uuid');
 
         $newsTable->addColumn('title', 'string');
         $newsTable->addColumn('text', 'text');
         $newsTable->addColumn('created_date', 'text');
         $newsTable->addColumn('status', 'smallint')->setNotnull(false);
-        
+
         $newsTable->setPrimaryKey(['id']);
 
-        $newsTable->addIndex(['statuss']);
-
+        $newsTable->addIndex(['status']);
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }

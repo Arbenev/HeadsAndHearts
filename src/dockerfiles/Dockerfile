@@ -76,13 +76,13 @@ RUN set -eux; \
           pecl install xdebug; \
           docker-php-ext-enable xdebug; \
         fi; \
-        apk del --no-cache .build-deps ;
+        apk del .build-deps ;
 
 RUN set -eux; \
         apk --no-cache add tzdata; \
         cp /usr/share/zoneinfo/Europe/Moscow /etc/localtime; \
         echo "Europe/Moscow" >  /etc/timezone; \
-        apk del --no-cache tzdata;
+        apk del tzdata;
 
 
 RUN set -eux; \
