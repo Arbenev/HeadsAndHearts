@@ -28,7 +28,7 @@ final class News
     #[ORM\Column(name: 'text', type: 'string')]
     private string $text;
 
-    
+
     #[ORM\Column(name: 'status', type: 'smallint', enumType: Status::class)]
     private Status $status;
 
@@ -67,6 +67,11 @@ final class News
     public function getCreated(): DateTimeImmutable
     {
         return $this->created;
+    }
+
+    public function getStatus(): Status
+    {
+        return $this->status;
     }
 
 }

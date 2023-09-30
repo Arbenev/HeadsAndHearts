@@ -24,6 +24,6 @@ class CreateHandler implements RequestHandlerInterface
     {
         $data = $request->getParsedBody();
         $news = $this->newsService->create($data['title'], $data['text']);
-        return new JsonResponse([], StatusCodeInterface::STATUS_CREATED);
+        return new JsonResponse(['id' => $news->getId()], StatusCodeInterface::STATUS_CREATED);
     }
 }

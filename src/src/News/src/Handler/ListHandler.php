@@ -22,9 +22,9 @@ class ListHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $data = $request->getQueryParams();
-        $page = $data['page'];
-        $limit = $data['limit'];
+        $params = $request->getQueryParams();
+        $page = $params['page'] ?? 1;
+        $limit = $params['limit'] ?? 10;
 
         $news = $this->newsService->findAll($page, $limit);
         $data = [];
@@ -33,7 +33,7 @@ class ListHandler implements RequestHandlerInterface
                 'id' => $item->getId(),
                 'title' => $item->getTitle(),
                 'text' => $item->getText(),
-                'created' => $item->getCreated()->format('c')
+                'created' => $item->getCreated()->format('c'),
             ];
         }
         return new JsonResponse($data, StatusCodeInterface::STATUS_OK);
