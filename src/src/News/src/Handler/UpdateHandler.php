@@ -10,6 +10,7 @@ use News\Contract\NewsServiceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Ramsey\Uuid\Uuid;
 
 class UpdateHandler implements RequestHandlerInterface
 {
@@ -23,6 +24,7 @@ class UpdateHandler implements RequestHandlerInterface
     {
         $id = $request->getAttribute('id');
         $data = $request->getParsedBody();
+        $this->newsService->update(Uuid::fromString($id), $data);
         return new JsonResponse([], StatusCodeInterface::STATUS_OK);
     }
 }

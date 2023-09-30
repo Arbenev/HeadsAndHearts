@@ -34,6 +34,7 @@ class ListHandler implements RequestHandlerInterface
                 'title' => $item->getTitle(),
                 'text' => $item->getText(),
                 'created' => $item->getCreated()->format('c'),
+                'status' => $item->getStatus(),
             ];
         }
         return new JsonResponse($data, StatusCodeInterface::STATUS_OK);

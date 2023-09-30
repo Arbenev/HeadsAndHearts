@@ -10,9 +10,9 @@ use News\Contract\NewsServiceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Ramsey\Uuid\Uuid;
 
-
-class CreateHandler implements RequestHandlerInterface
+class PublishHandler implements RequestHandlerInterface
 {
 
     public function __construct(
@@ -22,8 +22,8 @@ class CreateHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $data = $request->getParsedBody();
-        $news = $this->newsService->create($data['title'] ?? '', $data['text'] ?? '');
-        return new JsonResponse(['id' => $news->getId()], StatusCodeInterface::STATUS_CREATED);
+        $id = $request->getAttribute('id');
+        $this->newsService->publish(Uuid::fromString($id));
+        return new JsonResponse([], StatusCodeInterface::STATUS_OK);
     }
 }

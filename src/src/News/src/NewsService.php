@@ -52,6 +52,21 @@ class NewsService implements NewsServiceInterface
         $this->em->flush();
     }
 
+    public function update(UuidInterface $id, array $data): void
+    {
+        $news = $this->findById($id);
+        $news->updateThis($data);
+        $this->em->persist($news);
+        $this->em->flush();
+    }
+
+    public function publish(UuidInterface $id): void
+    {
+        $news = $this->findById($id);
+        $news->publishThis();
+        $this->em->persist($news);
+        $this->em->flush();
+    }
 
     private function getRepository(): NewsRepository
     {

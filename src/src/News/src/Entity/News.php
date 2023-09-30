@@ -74,4 +74,14 @@ final class News
         return $this->status;
     }
 
+    public function updateThis(array $data)
+    {
+        isset($data['title']) && ($this->title = $data['title']);
+        isset($data['text']) && ($this->text = $data['text']);
+    }
+
+    public function publishThis()
+    {
+        $this->status = Status::Publicated;
+    }
 }

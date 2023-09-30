@@ -34,6 +34,10 @@ class RoutesDelegator
             Handler\DeleteHandler::class,
         ]);
 
+        $app->patch('/news/{id}', [
+            Handler\PublishHandler::class,
+        ]);
+
         return $app;
     }
 }
